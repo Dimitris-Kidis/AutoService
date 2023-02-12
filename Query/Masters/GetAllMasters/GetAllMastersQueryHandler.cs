@@ -50,7 +50,7 @@ namespace Query.Masters.GetAllMasters
             {
                 if (_consRepository.FindBy(con => con.MasterId == item.Id).Any())
                 {
-                    item.Rating = _consRepository.FindBy(con => con.MasterId == item.Id).Select(con => con.Stars).Average();
+                    item.Rating = _consRepository.FindBy(con => con.MasterId == item.Id && con.Done == true).Select(con => con.Stars).Average();
                 } else
                 {
                     item.Rating = 0;

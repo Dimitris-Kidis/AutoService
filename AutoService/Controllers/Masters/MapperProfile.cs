@@ -2,6 +2,7 @@
 using AutoService.Controllers.Masters.ViewModel;
 using Query.Client.GetClientsForChat;
 using Query.Masters.GetMasterHistory;
+using Query.Masters.GetMasterInfo;
 
 namespace AutoService.Controllers.Masters
 {
@@ -14,6 +15,9 @@ namespace AutoService.Controllers.Masters
 
             CreateMap<ClientsForChatDto, ClientsForChatViewModel>();
             CreateMap<IEnumerable<ClientsForChatDto>, IEnumerable<ClientsForChatViewModel>>();
+
+            CreateMap<MasterInfoDto, MasterCabinetInfoViewModel>();
+
         }
 
     }

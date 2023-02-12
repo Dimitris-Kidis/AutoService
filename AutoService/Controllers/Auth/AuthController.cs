@@ -62,7 +62,6 @@ namespace AutoService.Controllers.Auth
                      new Claim("id", user.Id.ToString()),
                      new Claim("role", $"{user.Role}"),
                      new Claim("fullname", $"{user.FirstName + " " + user.LastName}"),
-                     new Claim("avatar", $"{user.Avatar}"),
                  },
                  expires: DateTime.Now.AddDays(30),
                  signingCredentials: signinCredentials

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Query.Masters.GetMasterInfo
+﻿namespace AutoService.Controllers.Masters.ViewModel
 {
-    public class MasterInfoDto
+    public class MasterCabinetInfoViewModel
     {
         public string Email { get; set; }
         public string FirstName { get; set; }
@@ -17,6 +11,5 @@ namespace Query.Masters.GetMasterInfo
         public string Experience { get; set; }
         public string Services { get; set; }
         public string Description { get; set; }
-        public string ClientAvatar { get; set; }
     }
 }

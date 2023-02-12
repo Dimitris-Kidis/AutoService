@@ -12,17 +12,22 @@ namespace Command.Consultations.CreateNewConsultation
     public class CreateNewConsultationCommandHandler : IRequestHandler<CreateNewConsultationCommand, int>
     {
         private readonly IAutoServiceRepository<Consultation> _consultationRepository;
-        public CreateNewConsultationCommandHandler(IAutoServiceRepository<Consultation> consultationRepository)
+        private readonly IAutoServiceRepository<Car> _carsRepository;
+        public CreateNewConsultationCommandHandler(
+            IAutoServiceRepository<Consultation> consultationRepository, IAutoServiceRepository<Car> carsRepository)
         {
             _consultationRepository = consultationRepository;
+            _carsRepository = carsRepository;
         }
         public Task<int> Handle(CreateNewConsultationCommand request, CancellationToken cancellationToken)
         {
+            var carId = _carsRepository.FindBy(car => car.ClientId == request.ClientId).LastOrDefault().Id;
             var newCons = new Consultation
             {
                 ClientId = request.ClientId,
                 MasterId = request.MasterId,
-                CarId = request.CarId,
+                CarId = carId,
+
                 Rated = false,
                 Done = false,
                 Stars = 0,

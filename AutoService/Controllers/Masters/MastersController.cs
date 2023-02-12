@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Query.Client.GetClientsForChat;
 using Query.Masters.GetMasterHistory;
+using Query.Masters.MasterCabinetInfo;
 
 namespace AutoService.Controllers.Masters
 {
@@ -52,6 +53,17 @@ namespace AutoService.Controllers.Masters
                 return BadRequest("Entity is not found");
             }
             return Ok(result.Select(_mapper.Map<ClientsForChatViewModel>));
+        }
+
+        [HttpGet("master-info/{masterId}")]
+        public async Task<IActionResult> GetMasterCabinetInfo(int masterId)
+        {
+            var result = await _mediator.Send(new GetMasterCabinetInfoQuery { MasterId = masterId });
+            if (result == null)
+            {
+                return BadRequest("Entity is not found");
+            }
+            return Ok(_mapper.Map<MasterCabinetInfoViewModel>(result));
         }
     }
 }

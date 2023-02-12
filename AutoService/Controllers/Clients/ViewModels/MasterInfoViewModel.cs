@@ -11,5 +11,7 @@
         public string Experience { get; set; }
         public string Services { get; set; }
         public string Description { get; set; }
+        public string ClientAvatar { get; set; }
+
     }
 }

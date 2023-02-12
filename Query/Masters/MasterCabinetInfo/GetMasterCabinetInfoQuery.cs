@@ -1,15 +1,15 @@
 ﻿using MediatR;
+using Query.Masters.GetMasterInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Command.Consultations.CreateNewConsultation
+namespace Query.Masters.MasterCabinetInfo
 {
-    public class CreateNewConsultationCommand : IRequest<int>
+    public class GetMasterCabinetInfoQuery : IRequest<MasterInfoDto>
     {
-        public int ClientId { get; set; }
         public int MasterId { get; set; }
     }
 }

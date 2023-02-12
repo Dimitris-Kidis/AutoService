@@ -20,7 +20,7 @@ namespace Command.Consultations.UpdateConsultation
         {
             if (!request.Role)
             {
-                var cons = _consRepository.FindBy(cons => cons.ClientId == request.ClientId).FirstOrDefault();
+                var cons = _consRepository.FindBy(cons => cons.ClientId == request.ClientId).LastOrDefault();
 
                 cons.Done = request.Done;
                 cons.Stars = request.Stars;
@@ -32,7 +32,7 @@ namespace Command.Consultations.UpdateConsultation
             }
             else
             {
-                var cons = _consRepository.FindBy(cons => cons.ClientId == request.ClientId && cons.MasterId == request.MasterId).FirstOrDefault();
+                var cons = _consRepository.FindBy(cons => cons.ClientId == request.ClientId && cons.MasterId == request.MasterId).LastOrDefault();
 
                 cons.Done = request.Done;
                 cons.Stars = request.Stars;

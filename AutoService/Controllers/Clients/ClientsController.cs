@@ -5,6 +5,8 @@ using Command.Consultations.CreateNewConsultation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Query.Client.GetClientHistory;
+using Query.Client.GetCurrentConsultation;
+using Query.Consultations.GetIsThereConsultation;
 using Query.Masters.GetMasterInfo;
 
 namespace AutoService.Controllers.Clients
@@ -60,6 +62,28 @@ namespace AutoService.Controllers.Clients
                 return BadRequest("Entity is not found");
             }
             return Ok(_mapper.Map<MasterInfoViewModel>(result));
+        }
+
+        [HttpGet("current-consultation/{userId}/{role}")]
+        public async Task<IActionResult> GetCurrentMasterId(int userId, bool role)
+        {
+            var result = await _mediator.Send(new GetCurrentConsultationQuery { UserId = userId, Role = role });
+            if (result == null)
+            {
+                return BadRequest("Entity is not found");
+            }
+            return Ok(_mapper.Map<CurrentConsultationViewModel>(result));
+        }
+
+        [HttpGet("is-there-consultation/{userId}/{role}")]
+        public async Task<IActionResult> GetBoolIsThereConsultation(int userId, bool role)
+        {
+            var result = await _mediator.Send(new GetIsThereConsultationQuery { UserId = userId, Role = role });
+            if (result == null)
+            {
+                return BadRequest("Entity is not found");
+            }
+            return Ok(_mapper.Map<IsThereConsultationViewModel>(result));
         }
     }
 }

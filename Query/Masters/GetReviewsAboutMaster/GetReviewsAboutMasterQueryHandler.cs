@@ -35,6 +35,7 @@ namespace Query.Masters.GetReviewsAboutMaster
 
             var reviews = (from con in cons
                           join user in users on con.ClientId equals user.Id
+                          where con.Done == true
                           select new MasterReviewDto
                           {
                               Id = con.MasterId,

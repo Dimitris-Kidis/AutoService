@@ -3,21 +3,22 @@ using ApplicationCore.Services.Repository.AutoServiceRepository;
 using ApplicationCore.Services.Repository.UserRepository;
 using AutoMapper;
 using MediatR;
+using Query.Masters.GetMasterInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Query.Masters.GetMasterInfo
+namespace Query.Masters.MasterCabinetInfo
 {
-    public class GetMasterInfoQueryHandler : IRequestHandler<GetMasterInfoQuery, MasterInfoDto>
+    public class GetMasterCabinetInfoHandler : IRequestHandler<GetMasterCabinetInfoQuery, MasterInfoDto>
     {
         private readonly IUserRepository<User> _userRepository;
         private readonly IAutoServiceRepository<Consultation> _consRepository;
         private readonly IMapper _mapper;
 
-        public GetMasterInfoQueryHandler(
+        public GetMasterCabinetInfoHandler(
             IUserRepository<User> userRepository,
             IAutoServiceRepository<Consultation> consRepository,
             IMapper mapper)
@@ -27,12 +28,10 @@ namespace Query.Masters.GetMasterInfo
             _mapper = mapper;
         }
 
-        public async Task<MasterInfoDto> Handle(GetMasterInfoQuery request, CancellationToken cancellationToken)
+        public async Task<MasterInfoDto> Handle(GetMasterCabinetInfoQuery request, CancellationToken cancellationToken)
         {
-            var masterId = _consRepository.FindBy(cons => cons.ClientId == request.ClientId && cons.Done == false).LastOrDefault().MasterId;
 
-            var master = _userRepository.FindBy(user => user.Id == masterId).FirstOrDefault();
-            var clientAvatar = _userRepository.FindBy(user => user.Id == request.ClientId).FirstOrDefault().Avatar;
+            var master = _userRepository.FindBy(user => user.Id == request.MasterId).FirstOrDefault();
 
             var masterInfo = new MasterInfoDto
             {
@@ -44,8 +43,7 @@ namespace Query.Masters.GetMasterInfo
                 Avatar = master.Avatar,
                 Experience = master.Experience,
                 Services = master.Services,
-                Description = master.Description,
-                ClientAvatar = clientAvatar
+                Description = master.Description
             };
 
             return _mapper.Map<MasterInfoDto>(masterInfo);
