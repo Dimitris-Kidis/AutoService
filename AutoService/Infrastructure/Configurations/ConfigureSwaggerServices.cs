@@ -17,7 +17,7 @@ namespace AutoService.Infrastructure.Configurations
                     Description = "AutoService Online API Services.",
                     Contact = new OpenApiContact
                     {
-                        Name = "Potrimba Vadim"
+                        Name = "Andrei"
                     },
                 });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
